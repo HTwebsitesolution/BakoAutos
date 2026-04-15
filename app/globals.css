@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    background-color: #0A0A0A;
+    color: #F0EEE8;
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+  ::selection { background: #F5C400; color: #0A0A0A; }
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: #0A0A0A; }
+  ::-webkit-scrollbar-thumb { background: #F5C400; border-radius: 2px; }
+}
+
+/* Ticker animation — must be global */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Pulse for hero badge */
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* Custom cursor — desktop only */
+.cursor {
+  position: fixed; top: 0; left: 0;
+  width: 10px; height: 10px;
+  background: #F5C400; border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 38px; height: 38px;
+  border: 1px solid rgba(245,196,0,0.4);
+  border-radius: 50%; pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.12s ease-out;
+}
+.cursor.big { width: 18px; height: 18px; }
+.cursor-ring.big { width: 54px; height: 54px; }
+
+/* Tailwind md breakpoint helpers */
+@media (min-width: 768px) {
+  .hidden.md\:flex { display: flex !important; }
+  .flex.md\:hidden { display: none !important; }
+  .hidden.md\:block { display: block !important; }
+}
+
+@media (max-width: 767px) {
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+}
